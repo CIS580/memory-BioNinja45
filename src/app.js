@@ -9,9 +9,18 @@ var game = new Game(canvas, update, render);
 
 // We have 9 pairs of possible cards that are about 212px square
 var cards = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
+while(cards.length > 0){
+	var index = Math.floor(Math.random() * (cards.length) -1);
+	board.push({card:cards[index],flip:false});
+	cards.splice(index,1);
+}
 var board = [];
 
+var Image = new Image();
+var Image.src = 'assets/animals.png';
 // TODO: Place the cards on the board in random order
+
+
 
 canvas.onclick = function(event) {
   event.preventDefault();
@@ -55,4 +64,18 @@ function render(elapsedTime, ctx) {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // TODO: Render the board
+	for(var y = 0; y<3; y++){
+		for(var x=0; x<6;x++){
+			var card = board[6 * y + x];
+			if(card.flip==true){
+				ctx.drawImage(Image,(card.card%3)*212,Math.floor(card.card/3)*212,212,212,x*165+3,y*165+3,160,160
+			}
+			else{
+				ctx.fillStyle="blue";
+				ctx.fillRect(x*165+3,y*165+3,160,160);
+			}
+		
+		}
+	}
+
 }
